@@ -1,0 +1,11 @@
+.loginTitle{
+    text-align: center;
+}
+.form-container{
+    /*设置居中*/
+    margin: auto;
+    /*设置宽度*/
+    width: 300px;
+    /*设置上下边距*/
+    padding: 10px;
+}
