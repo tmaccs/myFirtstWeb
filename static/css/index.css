@@ -3,3 +3,40 @@
     width:100px;
     height: 30px;
 }
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+.question-list li{
+    border-bottom: 1px solid;
+    overflow: hidden;
+    padding: 15px 0px;
+}
+
+.avatar-group{
+    width: 38px;
+    height: 100%;
+    float: left;
+}
+.avatar-group .avatar{
+    width: 38px;
+    height: 38px;
+    border-radius:50%;
+}
+.question-group{
+    float: left;
+    width: 660px;
+    margin-left: 10px;
+}
+.question-group .question-title a{
+    color: #259;
+    /*文字的重量*/
+    font-weight: 900;
+}
+
+.question-info{
+    text-align: right;
+}
+.question-info span{
+    margin-right: 15px;
+}

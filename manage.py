@@ -1,7 +1,9 @@
+#encoding:utf-8
 from flask_script import Manager
 from flask_migrate import Migrate,MigrateCommand
 from try_demo import app
 from exts import db
+from models import Users,Question,Answer
 
 manager = Manager(app)
 #使用Migrate 绑定APP和db

@@ -1,0 +1,44 @@
+.question_info{
+    text-align: center;
+    margin-top: 15px;
+}
+.question_info span{
+    margin: 10px;
+}
+.form-group{
+    text-align: right;
+}
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.answer_list{
+    padding-left: 0px;
+ }
+.answer_list li{
+    list-style: none;
+    border-bottom:1px solid #eee;
+}
+/*.answer_detail{*/
+    /*float: left;*/
+/*}*/
+
+.answer_detail{
+    font-size: 16px;
+    color: #9b9b9b;
+    line-height: 40px;
+}
+.answer_detail .answer_author{
+    margin-left: 15px;
+}
+.answer_detail .answer_time{
+    /*text-align: right;没有效果*/
+    float: right;
+}
+.answer_content{
+    padding-left: 55px;
+}
+

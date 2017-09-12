@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}问题详情{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/detail.css') }}">
+{% endblock %}
+
+{% block main %}
+    <h3 class="loginTitle">{{ question_d.title }}</h3>
+    <p class="question_info">
+        <span class="question_author">作者：{{ question_d.author.username }}</span>
+        <span class="question_time">时间：{{ question_d.create_time }}</span>
+    <hr>
+    <p class="question_content">{{ question_d.content }}</p>
+    <hr>
+    </p>
+
+    <h3>回答：（0）</h3>
+    <form action="{{ url_for('addAnswer') }}" method="post">
+        <div class="answer_info">
+            <div class="form-group">
+                <input type="text" class="form-control" name="answer_content" placeholder="请输入您的回答">
+                <input type="hidden" name="question_id" value="{{ question_d.id }}">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <ul class="answer_list">
+        {% for answer in question_d.answers %}
+            <li>
+            <div class="answer_detail">
+                  <img src="{{ url_for('static',filename='images/webLogo.gif') }}" alt="" class="avatar">
+                    <span class="answer_author">{{ answer.author.username }}</span>
+                    <span class="answer_time">{{ answer.create_time }}</span>
+
+            </div>
+            <p class="answer_content">
+                {{ answer.content }}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
