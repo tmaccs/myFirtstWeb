@@ -121,6 +121,8 @@ def context_processor():
     #这个return一定要写，不然会报TypeError: 'NoneType' object is not iterable
     return {}
 if __name__ == '__main__':
+    from werkzeug.contrib.fixers import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app)
     app.run()
 
 
