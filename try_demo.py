@@ -13,6 +13,7 @@ db.init_app(app)
 @app.route('/')
 def index():
     context={
+        #'questions':Question.query.order_by('-create_time').all()
         'questions':Question.query.order_by('create_time').all()
     }
     return render_template('index.html',**context)
