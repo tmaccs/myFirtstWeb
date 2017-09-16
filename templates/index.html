@@ -16,7 +16,7 @@
                 <img src="{{ url_for('static',filename='images/webLogo.gif') }}" alt="" class="avatar">
             </div>
             <div class="question-group">
-                <p class="question-title"><a href="{{ url_for('detail',question_id=2) }}">{{ question.title }}</a></p>
+                <p class="question-title"><a href="{{ url_for('detail',question_id=question.id) }}">{{ question.title }}</a></p>
                 <p class="question-content">{{ question.content }}</p>
                 <div class="question-info">
                     <span class="question-author">{{ question.author.username }}</span>

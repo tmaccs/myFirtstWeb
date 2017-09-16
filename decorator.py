@@ -10,5 +10,5 @@ def login_restriction(func):
         if session.get('user_id'):
             return func(*args,**kwargs)
         else:
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
     return wrapper

@@ -1,9 +1,10 @@
 #encoding:utf-8
-from flask import Flask,render_template,request,redirect,url_for,session
+from flask import Flask,render_template,request,redirect,url_for,session,g
 import config
 from models import Users,Question,Answer
 from exts import db
 from decorator import login_restriction
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -25,8 +26,9 @@ def login():
     else:
         telephone=request.form.get('telephone')
         password=request.form.get('password')
-        user=Users.query.filter(Users.telephone==telephone,Users.password==password).first()
-        if user:
+        #user=Users.query.filter(Users.telephone==telephone,Users.password==password).first()
+        user=Users.query.filter(Users.telephone==telephone).first()
+        if user and user.check_password(password):
             session['user_id']=user.id
             #return redirect(url_for('index'))
         #31天不删除，不需要再登录
@@ -78,16 +80,16 @@ def question():
         # question = Question(title=title,content=content,author_name=user.username)
         question = Question(title=title, content=content)
         # 因为在login时，在session中保存了key为user_id的键值对，session['user_id']=user.id，所以：
-        user_id = session.get('user_id')
-        user = Users.query.filter(Users.id == user_id).first()
-        question.author=user
+        # user_id = session.get('user_id')
+        # user = Users.query.filter(Users.id == user_id).first()
+        question.author=g.user
         db.session.add(question)
         db.session.commit()
         return redirect(url_for('index'))
 
 @app.route('/detail/<question_id>/')
 def detail(question_id):
-        question_detail=Question.query.filter(question_id==Question.id).first()
+        question_detail=Question.query.filter(Question.id==question_id).first()
         return render_template('detail.html',question_d=question_detail)
 
 @app.route('/addAnswer/',methods=['POST'])
@@ -96,9 +98,9 @@ def addAnswer():
     content = request.form.get('answer_content')
     answer = Answer(content=content)
 
-    user_id = session.get('user_id')
-    user = Users.query.filter(Users.id == user_id).first()
-    answer.author = user
+    # user_id = session.get('user_id')
+    # user = Users.query.filter(Users.id == user_id).first()
+    answer.author = g.user
 
     question_id = request.form.get('question_id')
     question = Question.query.filter(Question.id==question_id).first()
@@ -107,22 +109,31 @@ def addAnswer():
     db.session.commit()
     return redirect(url_for('detail', question_id=question_id))
 
+@app.before_request
+def my_before_request():
+    user_id = session.get('user_id')
+    user = Users.query.filter(Users.id == user_id).first()
+    g.user =user
+
 @app.context_processor
 def context_processor():
     #通过key来获得，所以是get('user_id')不是get('user.id')
-    user_id = session.get('user_id')
-    #如果User_id存在，则去数据库中找，从模型中拿出来
-    if user_id:
-        user = Users.query.filter(Users.id == user_id).first()
-        if user:
-            return {'user':user}
-        else:
-            return{}
+    # user_id = session.get('user_id')
+    # #如果User_id存在，则去数据库中找，从模型中拿出来
+    # if user_id:
+    #     user = Users.query.filter(Users.id == user_id).first()
+    #     if user:
+    if hasattr(g, 'user'):
+            return {'user':g.user}
+        #有这句话，折腾了两天，总是给我返回空字典，艹了
+        # else:
+        #     return{}
     #这个return一定要写，不然会报TypeError: 'NoneType' object is not iterable
     return {}
 if __name__ == '__main__':
     from werkzeug.contrib.fixers import ProxyFix
     app.wsgi_app = ProxyFix(app.wsgi_app)
     app.run()
+
 
 
