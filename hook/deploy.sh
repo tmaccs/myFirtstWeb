@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WEB_PATH='/html2/myFirtstWeb/
+WEB_PATH='/html/myFirtstWeb/'
 WEB_USER='root'
 WEB_USERGROUP='root'
 
