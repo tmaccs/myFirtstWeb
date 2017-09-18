@@ -7,3 +7,5 @@ def application(environ, start_response):
     os.system('git pull origin master')
     print('git pull finish')
     return u"b'Hello, webhook!'"
+
+
