@@ -16,11 +16,11 @@
     <hr>
     </p>
 
-    <h3>回答：（0）</h3>
+    <h3>补充：（{{ question_d.answers | length }}）</h3>
     <form action="{{ url_for('addAnswer') }}" method="post">
         <div class="answer_info">
             <div class="form-group">
-                <input type="text" class="form-control" name="answer_content" placeholder="请输入您的回答">
+                <input type="text" class="form-control" name="answer_content" placeholder="要补充啥子">
                 <input type="hidden" name="question_id" value="{{ question_d.id }}">
             </div>
             <div class="form-group">
@@ -30,18 +30,20 @@
     </form>
 
     <ul class="answer_list">
-        {% for answer in question_d.answers %}
+        {# 遍历回答，并按时间倒序排列 #}
+        {% for answer in question_d.answers | sort(attribute='create_time', reverse=true) %}
+{#        {% for answer in question_d.answers %}#}
             <li>
-            <div class="answer_detail">
-                  <img src="{{ url_for('static',filename='images/webLogo.gif') }}" alt="" class="avatar">
+                <div class="answer_detail">
+                    <img src="{{ url_for('static',filename='images/webLogo.gif') }}" alt="" class="avatar">
                     <span class="answer_author">{{ answer.author.username }}</span>
                     <span class="answer_time">{{ answer.create_time }}</span>
 
-            </div>
-            <p class="answer_content">
-                {{ answer.content }}
-            </p>
-        </li>
+                </div>
+                <p class="answer_content">
+                    {{ answer.content }}
+                </p>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

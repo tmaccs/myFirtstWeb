@@ -15,7 +15,7 @@ db.init_app(app)
 def index():
     context={
         #'questions':Question.query.order_by('-create_time').all()
-        'questions':Question.query.order_by('create_time').all()
+        'questions':Question.query.order_by('-create_time').all()
     }
     return render_template('index.html',**context)
 
@@ -83,6 +83,7 @@ def question():
         # user_id = session.get('user_id')
         # user = Users.query.filter(Users.id == user_id).first()
         question.author=g.user
+        #question.answer_num = Answer.query.filter(Question.id==Answer.id).last().id
         db.session.add(question)
         db.session.commit()
         return redirect(url_for('index'))
@@ -104,10 +105,17 @@ def addAnswer():
 
     question_id = request.form.get('question_id')
     question = Question.query.filter(Question.id==question_id).first()
+
     answer.question = question
+
     db.session.add(answer)
     db.session.commit()
     return redirect(url_for('detail', question_id=question_id))
+
+@app.route('/try_proj/')
+def try_proj():
+
+    return render_template('try_proj.html')
 
 @app.before_request
 def my_before_request():
