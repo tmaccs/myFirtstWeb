@@ -5,6 +5,7 @@ from models import Users,Question,Answer
 from exts import db
 from decorator import login_restriction
 from werkzeug.security import check_password_hash
+from sqlalchemy import or_
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -116,6 +117,12 @@ def addAnswer():
 def try_proj():
 
     return render_template('try_proj.html')
+
+@app.route('/search/')
+def search():
+    q=request.args.get('q')
+    questions = Question.query.filter(or_(Question.title.contains('q'),Question.content.contains('q')))
+    return render_template('search.html',q=q,questions=questions)
 
 @app.before_request
 def my_before_request():
