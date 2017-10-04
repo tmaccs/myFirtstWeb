@@ -12,7 +12,7 @@
         <span class="question_author">作者：{{ question_d.author.username }}</span>
         <span class="question_time">时间：{{ question_d.create_time }}</span>
     <hr>
-    <p class="question_content">{{ question_d.content }}</p>
+    <p class="question_content">{{ question_d.content|safe }}</p>
     <hr>
     </p>
 

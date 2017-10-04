@@ -3,6 +3,8 @@
 
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static',filename='css/question.css') }}">
+        {#    富文本编辑器#}
+    <script src="{{ url_for('static',filename='ckeditor/ckeditor.js') }}"></script>
 {% endblock %}
 
 {% block main %}
@@ -14,7 +16,8 @@
             </div>
             <div class="form-group">
                 {# 少了class='form-control',文本框就变成宽度只有一小半 #}
-                <textarea name="content" rows="10" placeholder="内容" class="form-control"></textarea>
+                <textarea name="content" rows="50" placeholder="内容" class="form-control"></textarea>
+                <script>CKEDITOR.replace('content',{allowedContent: true});</script>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary">立即发布</button>
