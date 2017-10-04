@@ -40,3 +40,8 @@ ul{
 .question-info span{
     margin-right: 15px;
 }
+.question-group .question-content{
+    height: 62px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
