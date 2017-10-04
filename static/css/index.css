@@ -41,7 +41,7 @@ ul{
     margin-right: 15px;
 }
 .question-group .question-content{
-    height: 20px;
+    height: 21px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
