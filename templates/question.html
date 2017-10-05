@@ -16,8 +16,8 @@
             </div>
             <div class="form-group">
                 {# 少了class='form-control',文本框就变成宽度只有一小半 #}
-                <textarea name="content" rows="50" placeholder="内容" class="form-control"></textarea>
-                <script>CKEDITOR.replace('content',{allowedContent: true});</script>
+                <textarea name="content" rows="100" placeholder="内容" class="form-control"></textarea>
+                <script>CKEDITOR.replace('content');</script>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary">立即发布</button>

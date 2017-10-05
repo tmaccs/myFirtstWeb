@@ -38,5 +38,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.entities = false; //是否使用HTML实体进行输出
 	// config.htmlEncodeOutput = false; //是否转义HTML代码
 	// config.removePlugins = 'bbcode';
+	config.height = 350;
 
 };

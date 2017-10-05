@@ -2,8 +2,12 @@
     /*设置居中*/
     margin: 0 auto;
     /*设置宽度*/
-    width: 500px;
+    width: 800px;
     /*设置上下边距*/
     padding: 10px;
     text-align: right;
+}
+.cke_1_contents{
+    /*设置ckeditor输入框的大小，本来找不到这个配置在哪里设置，通过chorme的检查找到该属性，然后直接在css中赋一个这个值*/
+    height: 350px;
 }
