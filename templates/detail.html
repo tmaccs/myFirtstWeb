@@ -15,7 +15,7 @@
     <p class="question_content">{{ question_d.content|safe }}</p>
     <hr>
     </p>
-
+        {#    这其实是一个过滤器#}
     <h3>补充：（{{ question_d.answers | length }}）</h3>
     <form action="{{ url_for('addAnswer') }}" method="post">
         <div class="answer_info">

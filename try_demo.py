@@ -1,11 +1,12 @@
 #encoding:utf-8
-from flask import Flask,render_template,request,redirect,url_for,session,g
+from flask import Flask,render_template,request,redirect,url_for,session,g,flash
 import config
 from models import Users,Question,Answer
 from exts import db
 from decorator import login_restriction
 from werkzeug.security import check_password_hash
 from sqlalchemy import or_
+import time
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -34,9 +35,13 @@ def login():
             #return redirect(url_for('index'))
         #31天不删除，不需要再登录
             session.permanent = True
+            flash("亲爱的，登录成功", 'success')
+            # return redirect(url_for('login'))
+            # time.sleep(1)
             return redirect(url_for('index'))
         else:
-            return u'手机号码或者密码错误，请确认后登录'
+            flash("亲爱的，密码或者用户名不对!", 'danger')
+            return redirect(url_for('login'))
 
 @app.route('/logout/')
 def logout():
@@ -56,17 +61,26 @@ def register():
     #手机号码验证，注册过了就不能注册了
         user=Users.query.filter(Users.telephone == telephone).first()
         if user:
-            return u'该手机号码已被注册，请更换手机号码'
+            flash("亲爱的，手机号已存在!", 'danger')
+            return redirect(url_for('register'))
         else:
-            #判断确认密码和密码是否相等
-            if confirmPassword != password:
-                return u'两次密码不相同，请核对'
+            #判断手机号是否是11位
+            if len(telephone)!= 11:
+                flash("亲爱的，请输入11位手机号码!", 'danger')
+                return redirect(url_for('register'))
             else:
-                user = Users(telephone=telephone,username=username,password=password)
-                db.session.add(user)
-                db.session.commit()
-                #注册成功后，跳转到登录界面
-                return redirect(url_for('login'))
+                #判断确认密码和密码是否相等
+                if confirmPassword != password:
+                    flash("亲爱的，两次输入的密码不一样!", 'danger')
+                    return redirect(url_for('register'))
+                else:
+                    user = Users(telephone=telephone,username=username,password=password)
+                    db.session.add(user)
+                    db.session.commit()
+                    #注册成功后，跳转到登录界面
+                    flash("亲爱的，注册成功，请登录", 'success')
+                    time.sleep(1)
+                    return redirect(url_for('login'))
 
 #用了装饰器@login_restriction之后，question=login_restriction(question)=wrapper，因为装饰器中return的是wrapper
 #run()这样运行就等于wrapper这样运行

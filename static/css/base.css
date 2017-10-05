@@ -17,3 +17,12 @@ body{
     overflow: hidden;
     padding: 10px;
 }
+
+.error_message{
+        /*设置居中*/
+    margin: auto;
+    /*设置宽度*/
+    width: 300px;
+    /*设置上下边距*/
+    padding-top: 15px;
+}
