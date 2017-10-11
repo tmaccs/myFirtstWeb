@@ -18,6 +18,7 @@
             <div class="question-group">
                 <p class="question-title"><a href="{{ url_for('detail',question_id=question.id) }}">{{ question.title }}</a></p>
                 <div class="q-content" style="height:35px;overflow: hidden;text-overflow: ellipsis;">
+{#                    jinja2不用|safe过滤器的话，会自动转义，在HTML中吧<p>空格等标签显示出来#}
                     <p class="question-content">{{ question.content|safe }}</p>
                 </div>
 

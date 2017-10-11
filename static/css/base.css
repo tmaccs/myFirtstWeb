@@ -8,6 +8,7 @@
 
 body{
     background: #f3f3f3;
+
 }
 
 .main{
@@ -16,6 +17,7 @@ body{
     margin: auto;
     overflow: hidden;
     padding: 10px;
+    padding-bottom: 39px;
 }
 
 .error_message{
@@ -25,4 +27,10 @@ body{
     width: 300px;
     /*设置上下边距*/
     padding-top: 15px;
+}
+footer{
+    text-align: center;
+    padding: 30px 40px;
+    background-color: #f2f2f2;
+    color: #666;
 }
