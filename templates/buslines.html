@@ -28,7 +28,7 @@ option = null;
 app.title = '温江公交路线 - 线特效';
 
 $.getJSON('{{ url_for('static',filename='data/wenjiang_buslines_pianyi.json') }}', function(data) {
-//$.getJSON('static/data/wenjiang_buslines_pianyi.json', function(data) {
+//$.getJSON('static/data/wenjiang_busldddines_pianyi.json', function(data) {
 //$.getJSON('lines-bus.json', function(data) {
     var hStep = 300 / (data.length - 1);
     var busLines = [].concat.apply([], data.map(function (busLine, idx) {
