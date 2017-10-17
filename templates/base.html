@@ -34,6 +34,7 @@
                     <a href="/">首页 <span class="sr-only">(current)</span></a>
                 </li>
                 <li><a href="{{ url_for('question') }}">遇到的问题</a></li>
+                <li><a href="{{ url_for('buslines') }}">温江公交动态图</a></li>
                 <li><a href="{{ url_for('try_proj') }}">学习的项目实作</a></li>
             </ul>
             <form class="navbar-form navbar-left" action="{{ url_for('search') }}" method="get">

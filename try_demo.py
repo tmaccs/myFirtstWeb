@@ -127,6 +127,10 @@ def addAnswer():
     db.session.commit()
     return redirect(url_for('detail', question_id=question_id))
 
+@app.route('/buslines/')
+def buslines():
+    return render_template('buslines.html')
+
 @app.route('/try_proj/')
 def try_proj():
 
